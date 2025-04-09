@@ -1,0 +1,14 @@
+data="mydata.txt"
+
+if [ $# -lt 1 ]; then
+   echo "Usage: phone searchfor[...searchfor]"
+   echo "(You didn't tell me what you want to search for.)"
+   exit 1
+fi
+
+search_term=$(echo "$@" | sed 's/ /|/g')
+
+egrep -i "($search_term)" $data | awk -f display.awk
+
+exit 0
+
